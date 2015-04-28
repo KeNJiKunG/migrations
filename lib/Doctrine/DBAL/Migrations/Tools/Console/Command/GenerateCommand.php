@@ -47,7 +47,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version<version> extends AbstractMigration
+class Version<version_number>_<version> extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -101,13 +101,16 @@ EOT
 
     protected function generateMigration(Configuration $configuration, InputInterface $input, $version, $up = null, $down = null)
     {
+        $num =  sprintf("%04d", count($configuration->getMigrations())+1);
         $placeHolders = array(
+            '<version_number>',
             '<namespace>',
             '<version>',
             '<up>',
             '<down>'
         );
         $replacements = array(
+            $num,
             $configuration->getMigrationsNamespace(),
             $version,
             $up ? "        " . implode("\n        ", explode("\n", $up)) : null,
@@ -118,7 +121,7 @@ EOT
         $dir = $configuration->getMigrationsDirectory();
         $dir = $dir ? $dir : getcwd();
         $dir = rtrim($dir, '/');
-        $path = $dir . '/Version' . $version . '.php';
+        $path = $dir . '/Version'  . $num .'_'. $version . '.php';
 
         if ( ! file_exists($dir)) {
             throw new \InvalidArgumentException(sprintf('Migrations directory "%s" does not exist.', $dir));

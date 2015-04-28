@@ -164,13 +164,14 @@ class Configuration
      */
     public function formatVersion($version)
     {
-        return sprintf('%s-%s-%s %s:%s:%s',
+        return sprintf('%s %s-%s-%s %s:%s:%s',
             substr($version, 0, 4),
-            substr($version, 4, 2),
-            substr($version, 6, 2),
-            substr($version, 8, 2),
-            substr($version, 10, 2),
-            substr($version, 12, 2)
+            substr($version, 5, 4),
+            substr($version, 9, 2),
+            substr($version, 11, 2),
+            substr($version, 13, 2),
+            substr($version, 15, 2),
+            substr($version, 17, 2)
         );
     }
 
